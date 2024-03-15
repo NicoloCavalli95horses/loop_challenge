@@ -1,0 +1,56 @@
+.footer {
+    $block: &;
+    padding-top: 44px;
+    background-color: $color-dark;
+	&__inner {
+        width: 100%;
+        min-height: 460px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+        .col {
+            height: 100%;
+            padding: 66px 22px 44px 44px;
+            display: grid;
+            align-content: space-between;
+        }
+        &__brand {
+            @include mq($until: tablet) {
+                text-align: center;
+                margin: 0 auto;
+            }
+            &__image {
+                width: clamp(280px, 30vw, 400px);
+            }
+            &__copy {
+                color: $color-light;
+                @include mq($until: tablet) {
+                    padding-top: 32px;
+                }
+            }
+        }
+        &__links {
+            background-color: $color-primary;
+            &__pages {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                @include mq($until: tablet) {
+                    text-align: center;
+                }
+                &__left, &__right {
+                    display: grid;
+                    grid-auto-flow: row;
+                    grid-gap: 24px;
+                    span {
+                        color: $color-light;
+                    }
+                }
+            }
+            &__social {
+                @include mq($until: tablet) {
+                    padding-top: 32px;
+                    margin: 0 auto;
+                }
+            }
+        }
+	}
+}

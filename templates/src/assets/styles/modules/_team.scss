@@ -1,0 +1,38 @@
+.team {
+  $block: &;
+  overflow: hidden;
+  padding: 66px 0 0 0;
+  background-color: $color-dark;
+  color: $color-light;
+  &__inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 22px;
+    &__filters {
+      flex-grow: 1;
+      align-self: end;
+      display: grid;
+      grid-auto-flow: column;
+      grid-gap: 12px;
+      justify-content: space-between;
+      @include mq($from: mobile, $until: tablet) {
+        width: 100%;
+        flex-grow: unset;
+        padding: 22px 0 0 0;
+    }
+      &__item {
+        text-transform: uppercase;
+        user-select: none;
+        cursor: pointer;
+        &.active {
+          color: $color-primary;
+        }
+        &:hover {
+          color: $color-primary-hover;
+          transition-duration: 400ms;
+        }
+        transition-duration: 400ms;
+      }
+    }
+  }
+}

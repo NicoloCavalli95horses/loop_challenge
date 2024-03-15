@@ -1,0 +1,135 @@
+.crew {
+	$block: &;
+	background-color: $color-dark;
+	&__button {
+		padding: 22px 0;
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		&__button {
+			color: $color-dark;
+			background-color: $color-light;
+		}
+	}
+	&__layout {
+		width: 100%;
+		padding: 12px 44px 0 44px;
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+		&__item {
+			cursor: pointer;
+			display: grid;
+			place-content: center;
+			width: 44px;
+			height: 44px;
+			color: $color-light;
+			transition-duration: 400ms;
+			box-sizing: border-box;
+			border-bottom: 2px solid transparent;
+			&:hover {
+				border-bottom: 2px solid $color-primary;
+				transition-duration: 400ms;
+			}
+			&.active {
+				background-color: $color-primary;
+				transition-duration: 400ms;
+			}
+		}
+	}
+	&__main {
+		$block: &;
+		height: 100%;
+		padding: 32px 0 0 0;
+		&__loading {
+			width: 100%;
+			text-align: center;
+			color: $color-light;
+		}
+		&__cards {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+			&__card {
+				width: 100%;
+				height: auto;
+				position: relative;
+				&__image {
+					min-height: 280px;
+					background-repeat: no-repeat;
+					background-size: cover;
+					background-position: 50% 50%;
+					transition-duration: 400ms;
+					&:after {
+						content: '';
+						display: block;
+						padding-bottom: 100%;
+					}
+					&.black-white {
+						transition-duration: 400ms;
+						filter: grayscale(1);
+					}
+				}
+				&__hidden {
+					width: 100%;
+					height: 100%;
+					position: absolute;
+					top: 0;
+					z-index: 1;
+					background-color: $color-light;
+					padding: 12px 22px;
+					display: flex;
+					flex-direction: column;
+					justify-content: flex-end;
+					&.from-left {
+						animation: slide-left 500ms ease-in-out forwards;
+					}
+					&.from-right {
+						animation: slide-right 500ms ease-in-out forwards;
+					}
+					h2 {
+						color: $color-primary;
+					}
+					&__tags {
+						display: grid;
+						grid-auto-flow: column;
+						grid-gap: 8px;
+						justify-content: start;
+						&__tag {
+							width: max-content;
+							padding: 8px 12px;
+							background-color: $color-primary;
+							border-radius: 22px;
+							p {
+								text-transform: uppercase;
+								letter-spacing: 1px;
+								color: $color-light;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+@keyframes slide-left {
+	from {
+		transform: translateX(0);
+		-webkit-transform: translateX(0);
+	}
+	to {
+		transform: translateX(100%);
+		-webkit-transform: translateX(100%);
+	}
+}
+@keyframes slide-right {
+	from {
+		transform: translateX(0);
+		-webkit-transform: translateX(0);
+	}
+	to {
+		transform: translateX(-100%);
+		-webkit-transform: translateX(-100%);
+	}
+}
