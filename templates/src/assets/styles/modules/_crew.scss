@@ -10,6 +10,12 @@
 		&__button {
 			color: $color-dark;
 			background-color: $color-light;
+			transition-duration: $transition-medium;
+			&:hover {
+				background-color: $color-light !important;
+				transform: scale(1.1);
+				transition-duration: $transition-medium;
+			}
 		}
 	}
 	&__layout {
@@ -25,16 +31,16 @@
 			width: 44px;
 			height: 44px;
 			color: $color-light;
-			transition-duration: 400ms;
+			transition-duration: $transition-medium;
 			box-sizing: border-box;
 			border-bottom: 2px solid transparent;
 			&:hover {
 				border-bottom: 2px solid $color-primary;
-				transition-duration: 400ms;
+				transition-duration: $transition-medium;
 			}
 			&.active {
-				background-color: $color-primary;
-				transition-duration: 400ms;
+				color: $color-primary;
+				transition-duration: $transition-medium;
 			}
 		}
 	}
@@ -59,14 +65,14 @@
 					background-repeat: no-repeat;
 					background-size: cover;
 					background-position: 50% 50%;
-					transition-duration: 400ms;
+					transition-duration: $transition-medium;
 					&:after {
 						content: '';
 						display: block;
 						padding-bottom: 100%;
 					}
 					&.black-white {
-						transition-duration: 400ms;
+						transition-duration: $transition-medium;
 						filter: grayscale(1);
 					}
 				}
@@ -82,10 +88,10 @@
 					flex-direction: column;
 					justify-content: flex-end;
 					&.from-left {
-						animation: slide-left 500ms ease-in-out forwards;
+						animation: slide-left $transition-medium ease-in-out forwards;
 					}
 					&.from-right {
-						animation: slide-right 500ms ease-in-out forwards;
+						animation: slide-right $transition-medium ease-in-out forwards;
 					}
 					h2 {
 						color: $color-primary;

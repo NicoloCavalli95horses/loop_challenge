@@ -29,9 +29,9 @@
         }
         &:hover {
           color: $color-primary-hover;
-          transition-duration: 400ms;
+          transition-duration: $transition-medium;
         }
-        transition-duration: 400ms;
+        transition-duration: $transition-medium;
       }
     }
   }

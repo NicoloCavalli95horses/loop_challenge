@@ -40,12 +40,13 @@ export function unlisten (event, callback) {
 export function toastMsg ({ msg, time = 5000, error }) {
 	const div = document.createElement('div');
 	const p = document.createElement('p');
-	p.textContent = msg;
 	if (error) {
 		div.classList.add('toast-msg', 'error');
+		p.textContent = 'Error: ';
 	} else {
 		div.classList.add('toast-msg');
 	}
+	p.textContent += msg;
 	div.appendChild(p);
 	document.querySelector('body').appendChild(div);
 	const t = setTimeout(() => {

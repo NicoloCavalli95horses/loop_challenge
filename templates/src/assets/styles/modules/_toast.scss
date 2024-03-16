@@ -8,9 +8,13 @@
     color: $color-dark;
     border-radius: 22px;
     box-shadow: 6px 8px 6px $color-dark;
-    animation: fadein-left 400ms ease-in-out forwards;
+    animation: fadein-left $transition-medium ease-in-out forwards;
+	&.error {
+		background-color: $color-primary;
+		color: $color-light;
+	}
     &.fadeout-right {
-		animation: fadeout-right 400ms ease-in-out forwards;
+		animation: fadeout-right $transition-medium ease-in-out forwards;
     }
 }
 

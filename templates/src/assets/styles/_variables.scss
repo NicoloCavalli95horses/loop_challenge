@@ -161,3 +161,6 @@ $ease-in-out-back	: cubic-bezier(0.680, -0.550, 0.265, 1.550);
 
 // predefined transitions
 $base_link_transition: 100ms $ease-in-out;
+$transition-slow: 1000ms;
+$transition-medium: 500ms;
+$transition-fast: 350ms;

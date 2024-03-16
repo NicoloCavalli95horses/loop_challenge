@@ -59,32 +59,31 @@ function setNextPage () {
 		return;
 	}
 	page.value = 1;
-	toastMsg({ msg: 'Last paged reached, coming back to page 1' });
+	toastMsg({ msg: 'Last paged reached, coming back to page 1', time: 6500 });
 }
 
-async function loadMore () {
-	setNextPage();
+async function fetchData ({ loadmore } = false) {
+	if (loadmore) {
+		setNextPage();
+	}
 	const res = await apiGetCrewMembers(apiOpt.value);
 	if (res?.data) {
-		meta.value = res.data.meta;
-		items.value.push(...res.data.data);
+		if (loadmore) {
+			meta.value = res.data.meta;
+			items.value.push(...res.data.data);
+		} else {
+			items.value = [...res.data.data];
+		}
 		return res.data.data;
-	} else {
-		toastMsg({ msg: 'Unable to fetch data', error: true });
 	}
-}
-async function filterMembers () {
-	const res = await apiGetCrewMembers(apiOpt.value);
-	if (res?.data) {
-		items.value = [...res.data.data];
-	}
+	toastMsg({ msg: loadmore ? 'unable to fetch more data' : 'unable to fetch data', error: true });
 }
 
 // ===========================
 // Watchers
 // ===========================
 watch(filter, async (newFilter) => {
-	await filterMembers();
+	await fetchData();
 	toastMsg({ msg: `Required page ${page.value} with duty: ${newFilter || 'none'}`, time: 1500 });
 });
 
@@ -92,17 +91,14 @@ watch(filter, async (newFilter) => {
 // Life cycle
 // ===========================
 onBeforeMount(async () => {
-	await loadMore();
+	await fetchData({ loadmore: true });
 });
 
 // ===========================
 // Events
 // ===========================
 listen('filter', (e) => {
-	/* DEV NOTE:
-	  Not clear from spec what should happen to the existing data when a filter is requested.
-	  This implementation assumes that as a new filter is requested, the first page of the filtered data is requested
-	*/
+	// DEV NOTE: This implementation assumes that as a new filter is requested, the first page of the filtered data is requested
 	page.value = 1;
 	filter.value = e.detail === 'false' ? undefined : e.detail;
 });
@@ -114,12 +110,10 @@ listen('layout', (e) => {
 
 listen('loadmore', async () => {
 	// DEV NOTE: This implementation assumes that as a new data is requested, the current filter is kept
-	const res = await loadMore();
-	if (res.length) {
-		toastMsg({ msg: `Required page ${page.value} with duty: ${filter.value || 'none'}`, time: 1500 });
-	} else {
-		toastMsg({ msg: `No data available for page: ${page.value} with duty: ${filter.value || 'none'}`, time: 1500 });
-	}
+	const res = await fetchData({ loadmore: true });
+	res.length
+		? toastMsg({ msg: `Required page ${page.value} with duty: ${filter.value || 'none'}`, time: 1500 })
+		: toastMsg({ msg: `No data available for page: ${page.value} with duty: ${filter.value || 'none'}`, time: 1500 });
 });
 </script>
 
