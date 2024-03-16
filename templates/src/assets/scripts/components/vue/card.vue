@@ -72,11 +72,12 @@ function onMouseLeave () {
 }
 
 // ===========================
-// Functions
+// Events
 // ===========================
 listen('window-resized', (e) => {
 	isMobile.value = e.detail.width <= SINGLE_COL_CARD_W;
 });
+
 </script>
 
 <style></style>

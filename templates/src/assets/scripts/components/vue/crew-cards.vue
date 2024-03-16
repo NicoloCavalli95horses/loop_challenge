@@ -21,9 +21,19 @@
 // ===========================
 // Import
 // ===========================
-import { watch, ref, computed, onBeforeMount } from 'vue';
-import { apiGetCrewMembers } from '../../models/http-request';
-import { listen, toastMsg } from '../../models/utils/event-bus';
+import {
+	watch,
+	ref,
+	computed,
+	onBeforeMount,
+} from 'vue';
+import {
+	listen,
+	toastMsg,
+} from '../../models/utils/event-bus';
+import {
+	apiGetCrewMembers,
+} from '../../models/http-request';
 
 import card from './card.vue';
 
@@ -38,7 +48,11 @@ const meta = ref(undefined);
 const layout = ref(undefined);
 
 const maxPage = computed(() => meta.value?.pagination?.limit);
-const layoutStyle = computed(() => typeof layout.value === 'number' ? { 'grid-template-columns': `repeat(${layout.value}, 1fr)` } : undefined);
+
+const layoutStyle = computed(() => typeof layout.value === 'number'
+	? { 'grid-template-columns': `repeat(${layout.value}, 1fr)` }
+	: undefined);
+
 const apiOpt = computed(() => {
 	return {
 		page: page.value,
