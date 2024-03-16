@@ -114,15 +114,15 @@ onBeforeMount(async () => {
 listen('filter', (e) => {
 	// DEV NOTE: This implementation assumes that as a new filter is requested, the first page of the filtered data is requested
 	page.value = 1;
-	filter.value = e.detail === 'false' ? undefined : e.detail;
+	filter.value = e.detail === 'default' ? undefined : e.detail;
 });
 
-listen('layout', (e) => {
-	layout.value = e.detail === 'auto' ? e.detail : parseInt(e.detail);
+listen('new-layout', (e) => {
+	layout.value = e.detail === 'default' ? e.detail : parseInt(e.detail);
 	toastMsg({ msg: `New layout: ${layout.value}`, time: 3000 });
 });
 
-listen('loadmore', async () => {
+listen('load-more', async () => {
 	// DEV NOTE: This implementation assumes that as a new data is requested, the current filter is kept
 	const res = await fetchData({ loadmore: true });
 	res.length

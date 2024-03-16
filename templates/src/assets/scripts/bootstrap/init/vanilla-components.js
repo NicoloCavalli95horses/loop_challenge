@@ -4,9 +4,7 @@ import * as VanillaFactory from 'Models/utils/vanilla-factory';
 // Define async components
 const asyncComponents = [
 	'navigation',
-	'crew-filters',
-	'crew-layout',
-	'load-button',
+	'toggle-btn',
 ];
 
 // Register async components

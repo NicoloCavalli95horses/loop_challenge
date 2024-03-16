@@ -155,11 +155,11 @@ include($root_path . '/partials/head.php');
 				]);
 				?>
 			</div>
-			<div class="team__inner__filters" data-component='{ "component": "crew-filters" }'>
-				<span class="team__inner__filters__item" data-filter="false">show all</span>
-				<span class="team__inner__filters__item" data-filter="trim">trim</span>
-				<span class="team__inner__filters__item" data-filter="tactic">tactic</span>
-				<span class="team__inner__filters__item" data-filter="helmsman">helmsman</span>
+			<div class="team__inner__filters" data-component='{ "component": "toggle-btn" }' data-event="filter">
+				<span class="team__inner__filters__item" data-value="default">show all</span>
+				<span class="team__inner__filters__item" data-value="trim">trim</span>
+				<span class="team__inner__filters__item" data-value="tactic">tactic</span>
+				<span class="team__inner__filters__item" data-value="helmsman">helmsman</span>
 			</div>
 		</div>
 	</div>
@@ -168,21 +168,22 @@ include($root_path . '/partials/head.php');
 <section class="crew">
 	<crew-cards data-component='{"factory": "vue"}'></crew-cards>
 
-	<div class="crew__layout" data-component='{ "component" : "crew-layout" }'>
-		<div class="crew__layout__item">auto</div>
+	<div class="crew__layout" data-component='{ "component" : "toggle-btn" }' data-event="new-layout">
+		<div class="crew__layout__item" data-value="default">auto</div>
 		<?php
-		  for ($i = 3; $i < 8; $i++) {
-			echo generate_component_layoutbtn([
+		for ($i = 3; $i < 8; $i++) {
+			echo generate_component_layoutBtn([
 				'class' => 'crew__layout__item',
 				'value' => $i,
+				'custom_data_value' => $i,
 			]);
-		  }
+		}
 		?>
 	</div>
-	<div class="crew__button" data-component='{ "component" : "load-button" }'>
+	<div class="crew__button" data-component='{ "component" : "toggle-btn" }' data-event="load-more">
 		<?php echo generate_component_button([
 			'label' => 'load more',
-			'class' => 'crew__button__button',
+			'class' => 'crew__button__button'
 		]) ?>
 	</div>
 </section>
