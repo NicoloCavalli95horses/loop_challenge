@@ -90,15 +90,16 @@ async function fetchData ({ loadmore } = false) {
 		}
 		return res.data.data;
 	}
-	toastMsg({ msg: loadmore ? 'unable to fetch more data' : 'unable to fetch data', error: true });
 }
 
 // ===========================
 // Watchers
 // ===========================
 watch(filter, async (newFilter) => {
-	await fetchData();
-	toastMsg({ msg: `Required page ${page.value} with duty: ${newFilter || 'none'}`, time: 1500 });
+	const res = await fetchData();
+	if (res?.length) {
+		toastMsg({ msg: `Required page ${page.value} with duty: ${newFilter || 'none'}`, time: 1500 });
+	}
 });
 
 // ===========================
@@ -125,7 +126,7 @@ listen('new-layout', (e) => {
 listen('load-more', async () => {
 	// DEV NOTE: This implementation assumes that as a new data is requested, the current filter is kept
 	const res = await fetchData({ loadmore: true });
-	res.length
+	res?.length
 		? toastMsg({ msg: `Required page ${page.value} with duty: ${filter.value || 'none'}`, time: 1500 })
 		: toastMsg({ msg: `No data available for page: ${page.value} with duty: ${filter.value || 'none'}`, time: 1500 });
 });
