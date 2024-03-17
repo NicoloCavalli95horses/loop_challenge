@@ -58,9 +58,7 @@ const cardRect = ref(undefined);
 // ===========================
 function onMouseEnter (id) {
 	cardRect.value = cardRef.value.getBoundingClientRect();
-	isLastCard.value =
-		window.innerWidth - (cardRect.value.left + cardRect.value.width) <
-		cardRect.value.width;
+	isLastCard.value = window.innerWidth - (cardRect.value.left + cardRect.value.width) < cardRect.value.width;
 	isHover.value = true;
 	emit('hover', id);
 }
